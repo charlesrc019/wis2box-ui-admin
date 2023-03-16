@@ -1,0 +1,91 @@
+{
+    "mcf": {
+      "version": 1.0
+    },
+    "wis2box": {
+        "topic_hierarchy": "",
+        "country": "",
+        "centre_id": "",
+        "retention": ""
+    },
+    "metadata": {
+      "identifier": "",
+      "hierarchylevel": ""
+    },
+    "identification": {
+      "title": "",
+      "abstract": "",
+      "dates": {
+        "creation": ""
+      },
+      "keywords": {
+        "default": {
+          "keywords": []
+        },
+        "wmo": {
+          "keywords": [],
+          "keywords_type": "theme",
+          "vocabulary": {
+            "name": "WMO Category Code",
+            "url": "https://github.com/wmo-im/wcmp-codelists/blob/main/codelists/WMO_CategoryCode.csv"
+          }
+        }
+      },
+      "extents": {
+        "spatial": [
+          {
+            "bbox": [
+              6.74995,
+              36.61998,
+              18.48024,
+              47.11539
+            ],
+            "crs": 4326
+          }
+        ],
+        "temporal": [
+          {
+            "begin": "",
+            "end": null,
+            "resolution": ""
+          }
+        ]
+      },
+      "rights": "WMO Unified Policy for the International Exchange of Earth System Data",
+      "url": "https://example.org/malawi-surface-weather-observations"
+    },
+    "contact": {
+      "pointOfContact": {
+        "organization": "",
+        "url": "",
+        "individualname": "",
+        "positionname": "",
+        "phone": "",
+        "fax": "",
+        "address": "",
+        "city": "",
+        "administrativearea": "",
+        "postalcode": "",
+        "country": "",
+        "email": "",
+        "hoursofservice": "",
+        "contactinstructions": ""
+      },
+      "distributor": {
+        "organization": "",
+        "url": "",
+        "individualname": "",
+        "positionname": "",
+        "phone": "",
+        "fax": "",
+        "address": "",
+        "city": "",
+        "administrativearea": "",
+        "postalcode": "",
+        "country": "",
+        "email": "",
+        "hoursofservice": "",
+        "contactinstructions": ""
+      }
+    }
+  }

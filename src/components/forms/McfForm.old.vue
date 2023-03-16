@@ -40,22 +40,29 @@
 
       <v-progress-linear indeterminate color="primary" :active="loading" />
       <v-form v-model="valid">
-        <v-expansion-panels>
-          <v-expansion-panel
-            title="Title"
-            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
-          >
-          <v-text-field label="Label"></v-text-field>
-          </v-expansion-panel>
-        </v-expansion-panels>
+        <v-jsf
+          v-model="model"
+          :schema="schema"
+          :options="options"
+          @input="updateModel($event)" 
+          @change="updateModel($event)" 
+          @input-child="updateModel($event)" 
+          @change-child="updateModel($event)"
+        />
       </v-form>
     </v-card>
   </div>
 </template>
 
 <script>
+import VJsf from "@koumoul/vjsf/lib/VJsf.js";
+import "@koumoul/vjsf/lib/VJsf.css";
+import "@koumoul/vjsf/lib/deps/third-party.js";
+import $RefParser from "@apidevtools/json-schema-ref-parser";
+import mergeAllOf from "json-schema-merge-allof";
 import { parse, stringify } from "yaml";
-import mcf from "@/models/mcf.json";
+import { clean } from "@/scripts/helpers.js";
+import mcf_schema from "@/models/mcf-form.json";
 
 let baseURL = window.VUE_ADMIN_URL;
 
@@ -86,9 +93,7 @@ export default {
     //   // handle success
     //   self.model = response.data;
     // });
-    //this.loadForm();
-    mcf.wis2box.retention = "asdf"
-    console.log(mcf)
+    this.loadForm();
   },
   methods: {
     log(item) {
@@ -111,7 +116,21 @@ export default {
         .catch(function (error) {
           // handle error
           console.log(error);
-        })
+        });
+
+      $RefParser.dereference(mcf_schema, (err, schema) => {
+        if (err) {
+          console.error(err);
+        } else {
+          this.title = schema.title;
+
+          const mergedSchema = mergeAllOf(schema);
+          const parsedSchema = this.prepareSchema("root", mergedSchema);
+
+          this.schema = Object.assign({}, parsedSchema);
+          this.loading = false;
+        }
+      });
     },
     resetForm() {
       this.model = {}
@@ -191,7 +210,28 @@ export default {
       output["distrib"] = input.contact.distributor
       output["distrib"]["duplicate_info"] = false
 
-    }
+    },
+    prepareSchema(title, node) {
+      if (typeof node !== "object") {
+        return node;
+      } else if (node.length) {
+        for (var i = 0; i < node.length; i++) {
+          this.prepareSchema(`node-${i}`, node[i]);
+        }
+        return node;
+      } else {
+        for (const [key, val] of Object.entries(node)) {
+          if (title === "properties") this.prepareSchema(key, val);
+          else this.prepareSchema("", val);
+        }
+      }
+
+      if (!title) return;
+      node.title = clean(node.title) | clean(title);
+      // if (!node.type) node.type = "object";
+
+      return node;
+    },
   },
 };
 </script>
