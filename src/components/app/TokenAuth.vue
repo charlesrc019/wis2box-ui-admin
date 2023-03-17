@@ -3,11 +3,11 @@
     <v-menu v-model="menu" :close-on-content-click="false">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
+          v-bind="attrs"
           class="font-weight-bold"
           v-html="$t('util.token')"
           color="#FFFFFF"
           plain
-          v-bind="attrs"
           v-on="on"
         />
       </template>

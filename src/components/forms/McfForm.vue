@@ -12,10 +12,10 @@
         <v-menu>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
+              v-bind="attrs"
               color="#FFA500" 
               class="ma-2" 
               title="Download"
-              v-bind="attrs"
               v-on="on"
               :disabled="!valid"
             >
@@ -63,7 +63,6 @@ export default {
   name: "McfForm",
   template: "#mcf-form",
   props: ["topic"],
-  components: { VJsf: VJsf },
   data: function () {
     return {
       loading: true,

@@ -1,10 +1,7 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import DatasetView from "../views/DatasetView.vue";
 import EditView from "../views/EditView.vue";
 import StationsView from "../views/StationsView.vue";
-
-Vue.use(VueRouter);
 
 const routes = [
   {
@@ -25,10 +22,11 @@ const routes = [
   }
 ];
 
-const router = new VueRouter({
+const router = createRouter({
   mode: "history",
+  history: createWebHistory(),
   base: window.VUE_ADMIN_URL.replace(window.VUE_APP_URL, ''),
   routes
 });
 
-export default router;
+export default router

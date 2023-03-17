@@ -14,7 +14,7 @@
       </v-card-title>
       <v-data-table :headers="headers" :items="stations" :search="search">
         <template v-slot:item.station_name="props">
-          <v-edit-dialog :return-value.sync="props.item.station_name" large>
+          <v-edit-dialog :return-value="props.item.station_name" large>
             {{ props.item.station_name }}
             <template v-slot:input>
               <v-text-field
@@ -28,7 +28,7 @@
         </template>
         <template v-slot:item.wigos_station_identifier="props">
           <v-edit-dialog
-            :return-value.sync="props.item.wigos_station_identifier"
+            :return-value="props.item.wigos_station_identifier"
             large
           >
             {{ props.item.wigos_station_identifier }}
@@ -44,7 +44,7 @@
         </template>
         <template v-slot:item.traditional_station_identifier="props">
           <v-edit-dialog
-            :return-value.sync="props.item.traditional_station_identifier"
+            :return-value="props.item.traditional_station_identifier"
             large
           >
             {{ props.item.traditional_station_identifier }}

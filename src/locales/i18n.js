@@ -1,7 +1,4 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
-
-Vue.use(VueI18n);
+import { createI18n } from "vue-i18n";
 
 function loadLocaleMessages() {
   const locales = require.context(".", true, /[A-Za-z0-9-_,\s]+\.json$/i);
@@ -10,15 +7,21 @@ function loadLocaleMessages() {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i);
     if (matched && matched.length > 1 && matched[1] !== "_template") {
       const locale = matched[1];
-      messages[locale] = locales(key);
+      messages[locale] = locales(key).default;
     }
   });
   return messages;
 }
 
 export { loadLocaleMessages };
-export default new VueI18n({
-  locale: "en",
-  fallbackLocale: "fr",
-  messages: loadLocaleMessages()
-});
+
+const i18n = createI18n({
+  legacy: false,
+  globalInjection: true,
+  locale: 'en',
+  fallbackLocale: 'fr',
+  formatFallbackMessages: true,
+  messages: loadLocaleMessages(),
+}); 
+
+export default i18n;

@@ -8,13 +8,13 @@
           v-slot="{ isHovering, props }"
         >
           <v-btn
+            v-bind="props"
             :href="item.href"
             :to="item.target"
             :target="`_window_${item.text}`"
             :color="isHovering ? '#014e9e' : undefined"
             class="font-weight-bold"
             variant="text"
-            v-bind="props"
           >
             {{ $t(`navigation.${item.text}`) }}
             <v-icon v-if="item.href !== undefined"> mdi-open-in-new </v-icon>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { documentation } from "../../../package";
+import main from "../../../package";
 let baseURL = window.VUE_ADMIN_URL;
 
 import { defineComponent } from "vue";
@@ -60,7 +60,7 @@ export default defineComponent({
         {
           text: "documentation",
           target: undefined,
-          href: documentation,
+          href: main.documentation,
         },
       ],
     };

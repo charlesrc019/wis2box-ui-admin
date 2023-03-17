@@ -3,7 +3,7 @@ const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 module.exports = {
   publicPath: "/admin",
 
-  transpileDependencies: ["vuetify", "@koumoul/vjsf"],
+  transpileDependencies: ["vuetify"],
 
   pluginOptions: {
     i18n: {
@@ -18,23 +18,6 @@ module.exports = {
 
   configureWebpack: {
     plugins: [new NodePolyfillPlugin()]
-  },
-
-  chainWebpack: config => {
-    config.resolve.alias.set('vue', '@vue/compat')
-    config.module
-      .rule('vue')
-      .use('vue-loader')
-      .tap(options => {
-        return {
-          ...options,
-          compilerOptions: {
-            compatConfig: {
-              MODE: 2
-            }
-          }
-        }
-      })
   }
 
 };

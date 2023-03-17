@@ -1,7 +1,14 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib/framework';
+import { createVuetify } from 'vuetify';
+//import { aliases, fa } from 'vuetify/lib/iconsets/fa';
+//import { mdi } from 'vuetify/lib/iconsets/mdi';
+import * as styles from 'vuetify/styles';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 
-Vue.use(Vuetify);
-
-export default new Vuetify({
+const vuetify = createVuetify({
+    components,
+    directives,
+    defaults: styles
 });
+
+export default vuetify;

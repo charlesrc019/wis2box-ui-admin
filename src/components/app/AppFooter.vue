@@ -19,7 +19,7 @@
 
 <script>
 import foot from "@/assets/img/wmo-foot.png";
-import { name, version, homepage } from "../../../package";
+import main from "../../../package";
 
 import { defineComponent } from "vue";
 
@@ -28,9 +28,9 @@ export default defineComponent({
   template: "#app-footer",
   data: function () {
     return {
-      version: version,
-      name: name,
-      home: homepage,
+      version: main.version,
+      name: main.name,
+      home: main.homepage,
       foot: foot,
     };
   },
